@@ -166,6 +166,17 @@ DROP COLUMN row_num;
 -- CLEAN DATA
 SELECT * FROM layoffs_staging;
 
+-- Check the usuable DATA
+SELECT company, stage, country, total_laid_off, percentage_laid_off, `date`
+FROM layoffs_staging
+WHERE company IN (
+    SELECT company 
+    FROM layoffs_staging 
+    WHERE total_laid_off IS NOT NULL AND percentage_laid_off IS NOT NULL
+)
+ORDER BY company, `date`;
+
 -- Works in MySQL
+
 
 
